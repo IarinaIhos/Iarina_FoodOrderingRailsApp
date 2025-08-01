@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Products" %>
+
+<h1>Products</h1>
+
+<div id="admin_products">
+  <% if @products.present? %>
+    <div class="products">
+      <% @products.each do |product| %>
+        <%= render product %>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No products found.</p>
+  <% end %>
+</div>
+
+<%= link_to "New product", new_admin_product_path, class: "submit-button" %>

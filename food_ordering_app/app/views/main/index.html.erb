@@ -1,0 +1,38 @@
+<div class="hero-section">
+  <% if @hero&.image&.attached? %>
+    <%= image_tag @hero.image, alt: "Hero Image", class: "hero-image" %>
+  <% else %>
+    <div class="hero-placeholder">No hero image uploaded yet.</div>
+  <% end %>
+  <div class="hero-content">
+    <h1>Ordering food</h1>
+    <div class="hero-separator">
+      <span class="jagged-line">〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰</span>
+      <%= image_tag "fork_knife.png", alt: "Fork and Knife", class: "fork-knife-icon" %>
+      <span class="jagged-line">〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰</span>
+    </div>
+    <p>Best food, best service, best customers.</p>
+  </div>
+</div>
+
+<%= render 'filter_nav' %>
+
+<div class="products-index">
+  <% if @products.present? %>
+  <div class="products">
+    <% @products.each do |product| %>
+      <div class="item <%= product.category %>">
+        <%= image_tag product.image, alt: product.name, class: "item-img" if product.image.attached? %>
+        <h3><%= product.name %></h3>
+        <p><%= product.description %></p>
+        <div class="item-footer">
+          <span class="price">$<%= number_with_precision(product.price, precision: 2) %></span>
+          <span class="diet-type"><%= product.diet %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% else %>
+    <p>No products match the selected filters.</p>
+  <% end %>
+</div>

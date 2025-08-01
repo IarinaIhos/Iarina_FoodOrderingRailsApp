@@ -1,0 +1,15 @@
+<% unless controller.class.name.include?('Admin') %>
+<nav class="navbar custom-navbar">
+  <div class="navbar-brand">
+    <%= image_tag "logo_footer.png", alt: "Eureka Caffe Logo", class: "navbar-logo" %>
+  </div>
+  <ul class="navbar-nav">
+    <li><%= link_to "HOME", root_path, class: "nav-link" %></li>
+    <li><%= link_to "ABOUT", root_path, class: "nav-link" %></li>
+    <li><%= link_to "SERVICE", root_path, class: "nav-link" %></li>
+    <li><%= link_to "BLOG", root_path, class: "nav-link" %></li>
+    <li><%= link_to "CONTACTS", root_path, class: "nav-link" %></li>
+    <li><%= link_to "DASHBOARD", root_path, class: "nav-link" %></li>
+  </ul>
+</nav>
+<% end %>

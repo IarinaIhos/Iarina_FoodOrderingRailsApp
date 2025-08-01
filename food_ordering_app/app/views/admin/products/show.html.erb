@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Product" %>
+
+<h1>Product</h1>
+
+<div id="product">
+  <p>
+    <strong>Name:</strong>
+    <%= @product.name %>
+  </p>
+
+  <p>
+    <strong>Category:</strong>
+    <%= @product.category %>
+  </p>
+
+  <p>
+    <strong>Diet:</strong>
+    <%= @product.diet %>
+  </p>
+
+  <p>
+    <strong>Price:</strong>
+    <%= number_with_precision(@product.price, precision: 2) %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @product.description %>
+  </p>
+
+  <% if @product.image.attached? %>
+    <p>
+      <strong>Image:</strong>
+      <%= image_tag @product.image, alt: @product.name, class: "item-img" %>
+    </p>
+  <% end %>
+
+  <%= link_to "Back to products", admin_products_path %>
+
+  <%= button_to "Destroy this product", { action: :destroy, id: @product.id }, method: :delete %> 
+</div>
