@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  console.log("Filter slider script loaded");
   const minSlider = document.querySelector('.min-price');
   const maxSlider = document.querySelector('.max-price');
   const minValue = document.querySelector('.min-value');
@@ -16,11 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function updateSlider() {
-    console.log("Updating slider");
     let min = parseInt(minSlider.value);
     let max = parseInt(maxSlider.value);
 
-    // Prevent overlap with a minimum gap of 1
     const gap = 1;
     if (min > max - gap) {
       min = max - gap;

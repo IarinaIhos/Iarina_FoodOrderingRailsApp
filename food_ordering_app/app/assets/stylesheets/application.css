@@ -157,13 +157,6 @@ body {
   padding: 0;
 }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 2rem;
-}
-
 .item {
   background: white;
   border-radius: 8px;

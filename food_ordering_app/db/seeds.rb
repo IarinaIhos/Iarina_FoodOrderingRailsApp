@@ -24,14 +24,6 @@ products.each do |product_data|
       image: URI.parse(product_data[:image_url])
     )
 
-    # downloaded_image = URI.open(product_data[:image_url])
-    # product.image.attach(
-    #   io: downloaded_image.read,
-    #   filename: "#{product_data[:name].parameterize}.png",
-    #   content_type: 'image/png'
-    # )
-    # downloaded_image.close 
-
     unless product.image.attached?
       raise "Image attachment failed for #{product_data[:name]}"
     end
@@ -40,7 +32,7 @@ products.each do |product_data|
     puts "Created product: #{product.name} with image attached: #{product.image.attached?}"
   rescue StandardError => e
     puts "Failed to create #{product_data[:name]}: #{e.message}"
-    raise e 
+    raise e
   end
 end
 
