@@ -1,5 +1,4 @@
 import { Application } from "@hotwired/stimulus"
-import '../packs/filter_slider'
 
 const application = Application.start()
 
