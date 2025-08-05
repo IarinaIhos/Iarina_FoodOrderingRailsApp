@@ -1,0 +1,24 @@
+<div class="login-new">
+<h1>Authentication</h1>
+
+<% if flash[:alert] %>
+  <div class="alert"><%= flash[:alert] %></div>
+<% end %>
+
+<%= form_with url: "/session", local: true, scope: :user do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true %>
+  </div>
+  <div>
+    <%= f.submit "Log In" %>
+  </div>
+<% end %>
+
+<%= link_to "Create Account", new_user_path %>
+<%= link_to "Back to home", root_path %>
+</div>

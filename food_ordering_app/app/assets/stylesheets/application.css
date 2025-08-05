@@ -456,3 +456,84 @@ body {
   background: #e76f51;
   transform: translateY(-1px);
 }
+
+.alert {
+  color: red;
+  margin-bottom: 20px;
+}
+.notice {
+  color: green;
+  margin-bottom: 20px;
+}
+div {
+  margin-bottom: 15px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+a {
+  color: #0066cc;
+  text-decoration: none;
+  margin-right: 10px;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.login-new {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 500px; 
+  margin: 0 auto; 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  text-align: center; 
+}
+.login-new h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+.login-new .alert {
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 3px;
+}
+.login-new input[type="email"],
+.login-new input[type="password"] {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 80%; 
+  display: block;
+  margin: 0 auto 10px; 
+}
+.login-new input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 20px;
+  width: 50%; 
+}
+.login-new input[type="submit"]:hover {
+  background-color: #0056b3;
+}

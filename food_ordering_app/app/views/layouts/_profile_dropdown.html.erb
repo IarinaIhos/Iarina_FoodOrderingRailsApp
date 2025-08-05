@@ -1,0 +1,8 @@
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle btn" type="button" id="profileDropdown" data-bs-toggle="dropdown" data-turbo="false" aria-haspopup="true" aria-expanded="false">
+    MY PROFILE
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+    <li><a class="dropdown-item" href="#">My Profile</a></li>
+  <li><%= link_to "Log Out", logout_path, method: :delete, data: { turbo: false }, class: "dropdown-item" %></li>  </ul>
+</li>
