@@ -6,6 +6,6 @@
     <span class="price">$<%= number_with_precision(product.price, precision: 2) %></span>
     <span class="diet-type"><%= product.diet %></span>
   </div>
-  <%= link_to "Edit", edit_admin_product_path(product), class: "edit-link" %> |
-  <%= link_to "Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "delete-link" %>
+  <%= link_to "Edit", edit_admin_product_path(product), class: "back-btn " %> |
+  <%= link_to "Delete", admin_product_path(product), method: :delete, data: { confirm: "Are you sure?" }, class: "back-btn " %>
 </div>

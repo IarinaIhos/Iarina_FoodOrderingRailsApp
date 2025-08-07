@@ -1,4 +1,7 @@
 class Product < ApplicationRecord
+  has_many :cart_items, dependent: :destroy
+  has_many :users, through: :cart_items
+
   has_one_attached :image
 
   validates :name, presence: true
@@ -10,13 +13,13 @@ class Product < ApplicationRecord
   enum :category, %w[appetizer main_course dessert beverage], default: "main_course"
   enum :diet, %w[regular vegetarian vegan gluten_free], default: "regular"
 
-  scope :filter_by_category, -> (category) { where(category: category) if category != 'all' }
-  scope :filter_by_diet, -> (diet) { where(diet: diet) if diet != 'all' }
-  scope :sort_by_price, -> (sorting) {
+  scope :filter_by_category, ->(category) { where(category: category) if category != "all" }
+  scope :filter_by_diet, ->(diet) { where(diet: diet) if diet != "all" }
+  scope :sort_by_price, ->(sorting) {
     case sorting
-    when 'asc'
+    when "asc"
       order(price: :asc)
-    when 'desc'
+    when "desc"
       order(price: :desc)
     else
       all

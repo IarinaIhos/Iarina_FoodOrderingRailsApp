@@ -1,0 +1,39 @@
+<div class="cart-container">
+  <table class="cart-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th> </th>
+        <th>Price</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.name %></td>
+          <td><%= cart_item.quantity %></td>
+          <td>
+            <%= form_with model: cart_item, url: cart_path(cart_item), method: :patch, local: true do |form| %>
+              <%= form.hidden_field :quantity, value: cart_item.quantity + 1 %>
+              <%= form.submit "+", class: "increase-btn" %>
+            <% end %>
+            <span class="button-spacer"></span>
+            <%= form_with model: cart_item, url: cart_path(cart_item), method: :patch, local: true do |form| %>
+              <%= form.hidden_field :quantity, value: cart_item.quantity - 1 if cart_item.quantity > 1 %>
+              <%= form.submit "-", class: "decrease-btn" %>
+            <% end %>
+          <td><%= number_with_precision(cart_item.product.price * cart_item.quantity, precision: 2) %></td>
+          <td>
+            <%= button_to "Remove", cart_path(cart_item), method: :delete, class: "remove-btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="cart-footer">
+    <%= link_to "Back to home", root_path, class: "back-btn" %>
+  </div>
+</div>

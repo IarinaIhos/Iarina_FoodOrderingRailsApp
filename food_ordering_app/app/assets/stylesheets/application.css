@@ -272,9 +272,9 @@ body {
 }
 
 .submit-button {
-  background: #f4a261;
+  background: #f4a261 !important;
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.1rem 1.5rem !important;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -285,7 +285,6 @@ body {
 
 .submit-button:hover {
   background: #e76f51;
-  transform: translateY(-1px);
 }
 
 .edit-link, .delete-link {
@@ -322,24 +321,26 @@ body {
   margin-right: 1rem;
 }
 
-.custom-select {
-  width: 150px;
-  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #fff;
-  font-size: 1rem;
-  color: #333;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  background-size: 12px;
-  cursor: pointer;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.filter-label {
+  margin-right: 0.5rem;
+  font-weight: 500;
 }
+
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  padding: 0;
+  margin: 0 10px;
+  cursor: pointer;
+  outline: none;
+}
+
 
 .custom-select:focus {
   border-color: #f4a261;
@@ -348,7 +349,7 @@ body {
 }
 
 .custom-select option {
-  padding: 0.5rem;
+
   background-color: #fff;
   color: #333;
 }
@@ -361,7 +362,7 @@ body {
 .price-slider-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   margin-left: auto; 
 }
 
@@ -537,3 +538,124 @@ a:hover {
 .login-new input[type="submit"]:hover {
   background-color: #0056b3;
 }
+
+.cart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.cart-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-table thead {
+  background-color: #2d1b46;
+  color: white;
+}
+
+.cart-table th {
+  padding: 15px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cart-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.cart-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cart-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.remove-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+}
+
+.increase-btn {
+  background-color: #f17b0d !important;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.increase-btn:hover {
+  background-color: #c96f15; 
+}
+.decrease-btn:hover { 
+  background-color: #c96f15;
+}
+
+.decrease-btn {
+  background-color: #f17b0d !important;
+  color: white;
+  border: none;
+  padding: 5px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.button-spacer {
+  display: inline-block;
+  width: 10px; 
+}
+
+.cart-footer {
+  position: fixed; 
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  background-color: #f9f9f9; 
+}
+
+.back-btn {
+  background-color: #f17b0d; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none; 
+  transition: background-color 0.3s ease; 
+}
+
+.back-btn:hover {
+  background-color: #c96f15; 
+}
+
+

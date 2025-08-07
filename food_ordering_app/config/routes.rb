@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   root to: "main#index"
 
   resources :users, only: [ :new, :create, :index ]
-  delete "/logout", to: "sessions#destroy", as: :logout
+
+  delete "/logout", to: "session#destroy", as: :logout
   get "/login", to: "session#new", as: :login
   post "/session", to: "session#create"
   get "/session/success", to: "session#success", as: :session_success
-  resources :products, only: [ :index ]
+
+  resources :carts, only: [ :index, :create, :destroy, :update ]
 end

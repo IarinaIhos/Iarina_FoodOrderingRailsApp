@@ -1,0 +1,22 @@
+<div class="products-index">
+  <% if @products.present? %>
+  <div class="products">
+    <% @products.each do |product| %>
+      <div class="item <%= product.category %>">
+        <%= image_tag product.image, alt: product.name, class: "item-img" if product.image.attached? %>
+        <h3><%= product.name %></h3>
+        <p><%= product.description %></p>
+        <div class="item-footer">
+          <span class="price">$<%= number_with_precision(product.price, precision: 2) %></span>
+          <% if logged_in? %>
+            <%= button_to "Add to Cart", carts_path(product_id: product.id), method: :post, class: "back-btn" %>
+          <% end %>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% else %>
+    <p>No products match the selected filters.</p>
+  <% end %>
+</div>
