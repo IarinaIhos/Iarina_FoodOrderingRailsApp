@@ -1,48 +1,68 @@
 <%= form_with(model: [:admin, product], local: true) do |form| %>
   <% if product.errors.any? %>
-    <div class="error-messages">
-      <h2><%= pluralize(product.errors.count, "error") %> Product could not be saved:</h2>
-      <ul>
-        <% product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h4>
+      <ul class="mb-0">
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="product-form">
-    <div class="form-group">
-      <%= form.label :name, style: "display: block" %>
-      <%= form.text_field :name, class: "form-control" %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :category, class: "form-label" %>
+        <%= form.select :category, options_for_select(Product.categories.keys.map { |c| [c.titleize, c] }, product.category), 
+            { include_blank: "Select a category" }, { class: "form-select" } %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :diet, class: "form-label" %>
+        <%= form.select :diet, options_for_select(Product.diets.keys.map { |d| [d.titleize, d] }, product.diet), 
+            { include_blank: "Select a diet type" }, { class: "form-select" } %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :price, class: "form-label" %>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <%= form.number_field :price, step: 0.01, min: 0, class: "form-control" %>
+        </div>
+      </div>
     </div>
 
-    <div class="form-group">
-      <%= form.label :category, style: "display: block" %>
-      <%= form.select :category, options_for_select(Product.categories.keys.map { |c| [c.titleize, c] }, product.category), include_blank: true, class: "form-control" %>
-    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, rows: 4, class: "form-control" %>
+      </div>
 
-    <div class="form-group">
-      <%= form.label :diet, style: "display: block" %>
-      <%= form.select :diet, options_for_select(Product.diets.keys.map { |d| [d.titleize, d] }, product.diet), include_blank: true, class: "form-control" %>
-    </div>
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label" %>
+        <%= form.file_field :image, class: "form-control", accept: "image/*" %>
+        <div class="form-text">Upload a product image (JPG, PNG, GIF)</div>
+      </div>
 
-    <div class="form-group">
-      <%= form.label :price, style: "display: block" %>
-      <%= form.number_field :price, step: 0.01, min: 0, class: "form-control" %>
+      <% if product.image.attached? %>
+        <div class="mb-3">
+          <label class="form-label">Current Image:</label>
+          <div class="current-image">
+            <%= image_tag product.image, alt: product.name, class: "product-thumbnail" %>
+          </div>
+        </div>
+      <% end %>
     </div>
+  </div>
 
-    <div class="form-group">
-      <%= form.label :description, style: "display: block" %>
-      <%= form.text_area :description, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :image, style: "display: block" %>
-      <%= form.file_field :image, class: "form-control" %>
-    </div>
-
-    <div>
-      <%= form.submit "Save Product", class: "submit-button" %>
-    </div>
+  <div class="d-flex gap-2 mt-4">
+    <%= form.submit product.new_record? ? "Create Product" : "Update Product", class: "btn btn-primary" %>
+    <%= link_to "Cancel", admin_products_path, class: "btn btn-secondary" %>
   </div>
 <% end %>

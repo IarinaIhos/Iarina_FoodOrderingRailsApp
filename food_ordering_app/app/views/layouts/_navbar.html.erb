@@ -1,18 +1,54 @@
-<% unless controller.class.name.include?('Admin') || controller.class.name.include?('Session') || controller.class.name.include?('Cart') %>
-<nav class="navbar custom-navbar">
-  <div class="navbar-brand">
-    <%= image_tag "logo_footer.png", alt: "Eureka Caffe Logo", class: "navbar-logo" %>
+  <div class="navbar-overlay">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <%= link_to image_tag("logo_footer.png", alt: "Eureka Caffe Logo", class: "navbar-logo"), root_path, class: "navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <div class="navbar-nav">
+            <%= link_to "HOME", root_path, class: "nav-link" %>
+            <span class="nav-dot">•</span>
+            <%= link_to "ABOUT", root_path, class: "nav-link" %>
+            <span class="nav-dot">•</span>
+            <%= link_to "CONTACTS", root_path, class: "nav-link" %>
+            <% if current_user %>
+              <% unless current_user.admin? %>
+                <span class="nav-dot">•</span>
+                <%= link_to carts_path, class: "nav-link cart-link" do %>
+                  CART
+                  <% cart_count = current_user.cart_items.sum(:quantity) %>
+                  <% if cart_count > 0 %>
+                    <span class="cart-badge"><%= cart_count %></span>
+                  <% end %>
+                <% end %>
+              <% end %>
+              <span class="nav-dot">•</span>
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= current_user.name || "PROFILE" %>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                  <li><%= link_to "View Profile", users_path(current_user), class: "dropdown-item" %></li>
+                  <% unless current_user.admin? %>
+                    <li><%= link_to "My Orders", orders_path, class: "dropdown-item" %></li>
+                  <% end %>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><%= button_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure?", turbo: false }, class: "dropdown-item" %></li>
+                </ul>
+              <% if current_user.admin? %>
+                <span class="nav-dot">•</span>
+                <%= link_to "PRODUCTS", admin_products_path, class: "nav-link" %>
+                <span class="nav-dot">•</span>
+                <%= link_to "USERS", admin_users_path, class: "nav-link" %>
+                <span class="nav-dot">•</span>
+                <%= link_to "ORDERS", admin_orders_path, class: "nav-link" %>
+              <% end %>
+            <% else %>
+              <span class="nav-dot">•</span>
+              <%= link_to "LOGIN", login_path, class: "nav-link" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
   </div>
-  
-  <ul class="navbar-nav">
-    <li><%= link_to "HOME", root_path, class: "nav-link" %></li>
-    <li><%= link_to "ABOUT", root_path, class: "nav-link" %></li>
-    <li><%= link_to "SERVICE", root_path, class: "nav-link" %></li>
-    <li><%= link_to "BLOG", root_path, class: "nav-link" %></li>
-    <li><%= link_to "CONTACTS", root_path, class: "nav-link" %></li>
-    <%= navbar_profile_link %>
-    <%= admin_products_link %>
-    <%= cart_link %>
-    </ul>
-</nav>
-<% end %>

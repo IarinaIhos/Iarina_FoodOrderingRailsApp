@@ -1,0 +1,45 @@
+<div class="order-detail-page">
+  <div class="order-detail-container">
+    <div class="order-detail-header">
+      <h1>Order <%= @order.id %></h1>
+      <p>Order details and information</p>
+    </div>
+
+    <div class="order-detail-content">
+      <div class="order-items-section">
+        <h3>Order Items</h3>
+        <% @order.order_items.each do |item| %>
+          <div class="order-detail-item">
+            <div class="item-details">
+              <h4><%= item.product.name %></h4>
+              <p class="item-description"><%= item.product.description %></p>
+              <span class="item-quantity">Quantity: <%= item.quantity %></span>
+            </div>
+            <div class="item-price">
+              <span>$<%= number_with_precision(item.price, precision: 2) %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="order-total-section">
+        <div class="total-row">
+          <span>Subtotal:</span>
+          <span>$<%= number_with_precision(@order.total_amount - 5.00, precision: 2) %></span>
+        </div>
+        <div class="total-row">
+          <span>Delivery Fee:</span>
+          <span>$5.00</span>
+        </div>
+        <div class="total-row total">
+          <span>Total:</span>
+          <span>$<%= number_with_precision(@order.total_amount, precision: 2) %></span>
+        </div>
+      </div>
+
+      <div class="order-actions">
+        <%= link_to "Back to Orders", orders_path, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</div> 

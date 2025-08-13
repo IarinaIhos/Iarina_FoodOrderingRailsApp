@@ -1,5 +1,16 @@
-<h1>New Product</h1>
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>Add New Product</h1>
+      <p>Create a new product for the menu</p>
+    </div>
 
-<%= render 'form', product: @product %>
-
-<%= link_to 'Back', admin_products_path %>
+    <div class="admin-content">
+      <div class="card">
+        <div class="card-body">
+          <%= render 'form', product: @product %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

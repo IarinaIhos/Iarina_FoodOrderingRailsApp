@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
+  has_many :orders, dependent: :destroy
 
   enum :role, { user: 0, admin: 1 }
 end

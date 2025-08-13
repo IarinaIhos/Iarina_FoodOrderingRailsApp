@@ -1,39 +1,75 @@
-<div class="cart-container">
-  <table class="cart-table">
-    <thead>
-      <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th> </th>
-        <th>Price</th>
-        <th> </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cart_items.each do |cart_item| %>
-        <tr>
-          <td><%= cart_item.product.name %></td>
-          <td><%= cart_item.quantity %></td>
-          <td>
-            <%= form_with model: cart_item, url: cart_path(cart_item), method: :patch, local: true do |form| %>
-              <%= form.hidden_field :quantity, value: cart_item.quantity + 1 %>
-              <%= form.submit "+", class: "increase-btn" %>
-            <% end %>
-            <span class="button-spacer"></span>
-            <%= form_with model: cart_item, url: cart_path(cart_item), method: :patch, local: true do |form| %>
-              <%= form.hidden_field :quantity, value: cart_item.quantity - 1 if cart_item.quantity > 1 %>
-              <%= form.submit "-", class: "decrease-btn" %>
-            <% end %>
-          <td><%= number_with_precision(cart_item.product.price * cart_item.quantity, precision: 2) %></td>
-          <td>
-            <%= button_to "Remove", cart_path(cart_item), method: :delete, class: "remove-btn" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="cart-page">
+  <div class="cart-container">
+    <% if @cart_items.any? %>
+      <div class="cart-layout">
+        <div class="cart-items">
+          <% @cart_items.each do |cart_item| %>
+            <div class="cart-item">
+              <div class="item-image">
+                <% if cart_item.product.image.attached? %>
+                  <%= image_tag cart_item.product.image, alt: cart_item.product.name %>
+                <% else %>
+                  <div class="placeholder-image">No Image</div>
+                <% end %>
+              </div>
+              
+              <div class="item-details">
+                <h3 class="item-name"><%= cart_item.product.name %></h3>
+                <p class="item-description"><%= cart_item.product.description %></p>
+                <div class="item-price">$<%= number_with_precision(cart_item.product.price, precision: 2) %></div>
+              </div>
 
-  <div class="cart-footer">
-    <%= link_to "Back to home", root_path, class: "back-btn" %>
+              <div class="item-quantity">
+                <div class="quantity-controls">
+                  <%= button_to "−", cart_path(cart_item), method: :patch, params: { quantity: [cart_item.quantity - 1, 1].max }, class: "quantity-btn decrease-btn", disabled: cart_item.quantity <= 1 %>
+                  
+                  <span class="quantity-display"><%= cart_item.quantity %></span>
+                  
+                  <%= button_to "+", cart_path(cart_item), method: :patch, params: { quantity: cart_item.quantity + 1 }, class: "quantity-btn increase-btn" %>
+                </div>
+              </div>
+
+              <div class="item-total">
+                <span class="total-price">$<%= number_with_precision(cart_item.product.price * cart_item.quantity, precision: 2) %></span>
+              </div>
+
+              <div class="item-actions">
+                <%= button_to "Remove", cart_path(cart_item), method: :delete, class: "remove-btn", data: { confirm: "Are you sure you want to remove this item?" } %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span>$<%= number_with_precision(@cart_items.sum { |item| item.product.price * item.quantity }, precision: 2) %></span>
+          </div>
+          <div class="summary-row">
+            <span>Delivery Fee:</span>
+            <span>$5.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span>$<%= number_with_precision(@cart_items.sum { |item| item.product.price * item.quantity } + 5.00, precision: 2) %></span>
+          </div>
+          <div class="summary-actions">
+            <%= button_to "Clear Cart", clear_carts_path, method: :delete, class: "clear-cart-btn", data: { confirm: "Are you sure you want to clear your cart?" } %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="empty-cart">
+        <h2>Your cart is empty</h2>
+        <%= button_to "Continue Shopping", root_path, method: :get, class: "continue-shopping-btn" %>
+      </div>
+    <% end %>
   </div>
 </div>
+
+<% if @cart_items.any? %>
+  <div class="cart-footer">
+    <%= button_to "Place Order", orders_path, method: :post, class: "place-order-btn", disabled: @cart_items.empty? %> 
+    <%= button_to "Continue Shopping", root_path, method: :get, class: "continue-shopping-btn", disabled: @cart_items.empty? %>
+  </div>
+<% end %>

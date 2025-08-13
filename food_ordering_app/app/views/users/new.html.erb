@@ -16,21 +16,28 @@
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+
   <div>
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
+
   <div>
     <%= f.label :password %>
     <%= f.password_field :password %>
   </div>
+
   <div>
     <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %>
   </div>
+
   <div>
     <%= f.submit "Create Account" %>
   </div>
+
 <% end %>
-<%= link_to "Back to home", root_path %>
+
+  <%= link_to "Back to home", root_path %>
+
 </div>

@@ -1,0 +1,48 @@
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>Edit User</h1>
+      <p>Update user information</p>
+    </div>
+
+    <div class="admin-content">
+      <div class="card">
+        <div class="card-body">
+          <%= form_with model: [:admin, @user], local: true do |form| %>
+            <% if @user.errors.any? %>
+              <div class="error-messages">
+                <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+                <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="form-group">
+              <%= form.label :name %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :email %>
+              <%= form.email_field :email, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :admin, "Admin Role" %>
+              <%= form.check_box :admin, class: "form-check-input" %>
+              <small class="form-text text-muted">Check this box to make this user an admin</small>
+            </div>
+
+            <div class="form-actions">
+              <%= form.submit "Update User", class: "submit-button" %>
+              <%= link_to "Cancel", admin_users_path, class: "btn btn-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

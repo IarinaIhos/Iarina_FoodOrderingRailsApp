@@ -1,5 +1,16 @@
-<h1>Editing Product</h1>
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>Edit Product</h1>
+      <p>Update product information</p>
+    </div>
 
-<%= render 'form', product: @product %>
-
-<%= link_to 'Back', admin_products_path %>
+    <div class="admin-content">
+      <div class="card">
+        <div class="card-body">
+          <%= render 'form', product: @product %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

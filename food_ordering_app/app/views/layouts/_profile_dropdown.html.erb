@@ -4,6 +4,9 @@
   </button>
   <ul class="dropdown-menu dropdown-menu-end custom-profile-dropdown" aria-labelledby="profileDropdown">
     <li><a class="dropdown-item" href="#">My Profile</a></li>
+    <% unless current_user.admin? %>
+      <li><%= link_to "My Orders", orders_path, class: "dropdown-item" %></li>
+    <% end %>
     <li><%= button_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure?" }, class: "dropdown-item" %></li>
   </ul>
 </li>
