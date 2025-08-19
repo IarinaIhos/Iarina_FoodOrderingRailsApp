@@ -108,6 +108,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (1.2.5)
+      bcrypt (~> 3.0)
+      devise (> 3.5.2, < 5)
+      rails (>= 4.2.0, < 8.1)
     dotenv (3.1.8)
     drb (2.2.3)
     ed25519 (1.4.0)
@@ -383,6 +387,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  devise_token_auth
   importmap-rails
   jbuilder
   kamal
