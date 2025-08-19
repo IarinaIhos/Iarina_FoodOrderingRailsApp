@@ -6,10 +6,11 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show]
   end
 
-  # API routes
+  #API routes
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show]
+      resources :products, only: [:index, :show]
     end
   end
 
