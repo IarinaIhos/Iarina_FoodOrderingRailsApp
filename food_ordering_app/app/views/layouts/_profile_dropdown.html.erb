@@ -1,0 +1,12 @@
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle btn" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    MY PROFILE
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end custom-profile-dropdown" aria-labelledby="profileDropdown">
+    <li><a class="dropdown-item" href="#">My Profile</a></li>
+    <% unless current_user.admin? %>
+      <li><%= link_to "My Orders", orders_path, class: "dropdown-item" %></li>
+    <% end %>
+    <li><%= button_to "Log Out", logout_path, method: :delete, data: { confirm: "Are you sure?" }, class: "dropdown-item" %></li>
+  </ul>
+</li>

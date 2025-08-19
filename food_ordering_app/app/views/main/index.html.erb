@@ -1,0 +1,20 @@
+<div class="hero-section">
+  <% if @hero&.image&.attached? %>
+    <%= image_tag @hero.image, alt: "Hero Image", class: "hero-image" %>
+  <% else %>
+    <div class="hero-placeholder">No hero image uploaded yet.</div>
+  <% end %>
+  <div class="hero-content">
+    <h1>Ordering food</h1>
+    <div class="hero-separator">
+      <span class="jagged-line">〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰</span>
+      <%= image_tag "fork_knife.png", alt: "Fork and Knife", class: "fork-knife-icon" %>
+      <span class="jagged-line">〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰〰</span>
+    </div>
+    <p>Best food, best service, best customers.</p>
+  </div>
+</div>
+
+<%= render 'filter_nav' %>
+
+<%= render 'food_grid'%>

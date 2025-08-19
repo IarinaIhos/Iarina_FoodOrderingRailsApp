@@ -1,0 +1,55 @@
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>Order <%= @order.id %></h1>
+      <p>Order details and customer information</p>
+    </div>
+
+    <div class="admin-content">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-8">
+              <h3>Order Items</h3>
+              <% @order.order_items.each do |item| %>
+                <div class="order-detail-item">
+                  <div class="item-details">
+                    <h4><%= item.product.name %></h4>
+                    <p class="item-description"><%= item.product.description %></p>
+                    <span class="item-quantity">Quantity: <%= item.quantity %></span>
+                  </div>
+                  <div class="item-price">
+                    <span>$<%= number_with_precision(item.price, precision: 2) %></span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <div class="col-md-4">
+              <h3>Customer Information</h3>
+              <div class="info-row">
+                <span class="info-label">Name:</span>
+                <span><%= @order.user.name %></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span><%= @order.user.email %></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Order Date:</span>
+                <span><%= @order.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Items:</span>
+                <span><%= @order.order_items.count %> items</span>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Total:</span>
+                <span class="price-large">$<%= number_with_precision(@order.total_amount, precision: 2) %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

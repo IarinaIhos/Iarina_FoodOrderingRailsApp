@@ -1,0 +1,70 @@
+<div class="filter-nav-new">
+  <%= form_with url: root_path, method: :get, local: true, html:{class: "filter-form"} do |form| %>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <div class="d-flex gap-5">
+            <div class="filter-group">
+              <div class="dropdown">
+                <button class="btn dropdown-toggle filter-dropdown" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= params[:category]&.titleize || "Category" %>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                  <li><%= link_to "All", root_path(request.query_parameters.merge(category: "all")), class: "dropdown-item" %></li>
+                  <% Product.categories.keys.each do |category| %>
+                    <li><%= link_to category.titleize, root_path(request.query_parameters.merge(category: category)), class: "dropdown-item" %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <div class="dropdown">
+                <button class="btn dropdown-toggle filter-dropdown" type="button" id="sortingDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= params[:sorting] == "asc" ? "Price Ascending" : (params[:sorting] == "desc" ? "Price Descending" : "Sorting") %>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="sortingDropdown">
+                  <li><%= link_to "None", root_path(request.query_parameters.merge(sorting: "none")), class: "dropdown-item" %></li>
+                  <li><%= link_to "Price Ascending", root_path(request.query_parameters.merge(sorting: "asc")), class: "dropdown-item" %></li>
+                  <li><%= link_to "Price Descending", root_path(request.query_parameters.merge(sorting: "desc")), class: "dropdown-item" %></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <div class="dropdown">
+                <button class="btn dropdown-toggle filter-dropdown" type="button" id="dietDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= params[:diet]&.titleize || "Diet" %>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dietDropdown">
+                  <li><%= link_to "All", root_path(request.query_parameters.merge(diet: "all")), class: "dropdown-item" %></li>
+                  <% Product.diets.keys.each do |diet| %>
+                    <li><%= link_to diet.titleize, root_path(request.query_parameters.merge(diet: diet)), class: "dropdown-item" %></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="d-flex justify-content-end">
+            <div class="price-slider-container">
+              <span class="min-value">$<%= params[:min_price] || 1 %></span>
+              <div class="price-slider">
+                <div class="slider-track">
+                  <div class="slider-range"></div>
+                </div>
+                <input type="range" class="slider min-price" min="1" max="100" value="<%= params[:min_price] || 1 %>">
+                <input type="range" class="slider max-price" min="1" max="100" value="<%= params[:max_price] || 100 %>">
+              </div>
+              <span class="max-value">$<%= params[:max_price] || 100 %></span>
+            </div>
+            <%= form.hidden_field :min_price, value: params[:min_price] || 1, id: "min_price" %>
+            <%= form.hidden_field :max_price, value: params[:max_price] || 100, id: "max_price" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

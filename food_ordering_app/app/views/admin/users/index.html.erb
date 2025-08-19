@@ -1,0 +1,50 @@
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>All Users</h1>
+      <p>Manage user accounts and information</p>
+    </div>
+
+    <div class="admin-content">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><strong><%= user.name %></strong></td>
+                <td><%= user.email %></td>
+                <td>
+                  <% if user.admin? %>
+                    <span class="badge bg-primary">Admin</span>
+                  <% else %>
+                    <span class="badge bg-secondary">User</span>
+                  <% end %>
+                </td>
+                <td>
+                  <small><%= user.created_at.strftime("%b %d, %Y") %></small>
+                </td>
+                <td>
+                  <div class="btn-group" role="group">
+                    <%= link_to "View", admin_user_path(user), class: "btn btn-sm btn-outline-info" %>
+                    <%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-sm btn-outline-primary" %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,52 @@
+<div class="orders-page">
+  <div class="orders-container">
+    <div class="orders-header">
+      <h1>My Orders</h1>
+      <p>View your order history</p>
+    </div>
+
+    <div class="orders-content">
+      <% if @orders.any? %>
+        <div class="orders-list">
+          <% @orders.each do |order| %>
+            <div class="order-card">
+              <div class="order-header">
+                <div class="order-info">
+                  <h3>Order <%= order.id %></h3>
+                  <div class="order-date"><%= order.created_at.strftime("%B %d, %Y at %I:%M %p") %></div>
+                </div>
+                <div class="order-total">
+                  <span>Total:</span>
+                  <span class="total-amount">$<%= number_with_precision(order.total_amount, precision: 2) %></span>
+                </div>
+              </div>
+
+              <div class="order-items">
+                <% order.order_items.each do |item| %>
+                  <div class="order-item">
+                    <div class="item-info">
+                      <span class="item-name"><%= item.product.name %></span>
+                      <span class="item-quantity">× <%= item.quantity %></span>
+                    </div>
+                    <span class="item-price">$<%= number_with_precision(item.price, precision: 2) %></span>
+                  </div>
+                <% end %>
+              </div>
+
+              <div class="order-footer">
+                <%= link_to "View Details", order_path(order), class: "btn btn-outline-primary btn-sm" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="empty-orders">
+          <div class="empty-orders-icon">📦</div>
+          <h2>No Orders Yet</h2>
+          <p>You haven't placed any orders yet. Start shopping to see your orders here!</p>
+          <%= link_to "Start Shopping", root_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 
