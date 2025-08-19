@@ -17,10 +17,4 @@ class Admin::OrdersController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     redirect_to admin_orders_path, alert: "Order not found."
   end
-
-  def require_admin
-    unless current_user.admin?
-      redirect_to root_path, alert: "Access denied. Admin privileges required."
-    end
-  end
 end 

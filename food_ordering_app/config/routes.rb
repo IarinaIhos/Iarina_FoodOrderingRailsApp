@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   namespace :admin do
     resources :products
     resources :users
@@ -7,13 +8,8 @@ Rails.application.routes.draw do
 
   root to: "main#index"
 
-  resources :users, only: [ :new, :create, :index ]
-  resources :orders, only: [:index, :show, :create]
-
-  delete "/logout", to: "session#destroy", as: :logout
-  get "/login", to: "session#new", as: :login
-  post "/session", to: "session#create"
-  get "/session/success", to: "session#success", as: :session_success
+  resources :users, only: [ :index ]
+  resources :orders, only: [ :index, :show, :create ]
 
   resources :carts, only: [ :index, :create, :destroy, :update ] do
     collection do

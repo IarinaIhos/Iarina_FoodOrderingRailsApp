@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  before_action :require_login
   before_action :set_order, only: [:show]
 
   def index
@@ -28,8 +27,6 @@ class OrdersController < ApplicationController
       else
         redirect_to carts_path, alert: "Failed to create order."
       end
-    rescue => e
-      redirect_to carts_path, alert: "Error creating order: #{e.message}"
     end
   end
 
