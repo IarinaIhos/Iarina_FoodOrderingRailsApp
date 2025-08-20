@@ -1,6 +1,6 @@
 class Api::V1::UsersController < Api::BaseController
-  skip_before_action :authenticate_user!
-  
+  before_action :doorkeeper_authorize! # Ensure the user is authenticated via Doorkeeper
+  before_action :require_admin, only: [:index, :show] # Ensure only admins can access these actions
   def index
     users = User.all
     
