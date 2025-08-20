@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   use_doorkeeper
+
   devise_for :users
+
   namespace :admin do
     resources :products
     resources :users
@@ -10,8 +12,12 @@ Rails.application.routes.draw do
   #API routes
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :show]
+      resources :users, only: [:index, :show, :create]
       resources :products, only: [:index, :show]
+
+      namespace :admin do
+        resources :users, only: [:index, :show, :update, :destroy]
+      end
     end
   end
 

@@ -6,6 +6,7 @@ Doorkeeper.configure do
   orm :active_record
   grant_flows %w[client_credentials password authorization_code refresh_token]
 
+  access_token_expires_in 2.hour
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_from_credentials do |_routes|
     user = User.find_by(email: params[:username])
