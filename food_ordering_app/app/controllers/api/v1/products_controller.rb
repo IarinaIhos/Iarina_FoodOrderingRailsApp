@@ -11,6 +11,8 @@ class Api::V1::ProductsController < Api::BaseController
   def show
     product = Product.find(params[:id])
     render json: product
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Product not found' }, status: :not_found
   end
 
   private
