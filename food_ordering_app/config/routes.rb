@@ -14,9 +14,18 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :show, :create]
       resources :products, only: [:index, :show]
+      resources :carts, only: [:index, :create, :update, :destroy] do
+        collection do
+          delete :clear
+        end
+      end
+
+      resources :orders, only: [:index, :show, :create]
 
       namespace :admin do
         resources :users, only: [:index, :show, :update, :destroy]
+        resources :products, only: [:index, :show, :create, :update, :destroy]
+        resources :orders, only: [:index, :show, :update, :destroy]
       end
     end
   end
