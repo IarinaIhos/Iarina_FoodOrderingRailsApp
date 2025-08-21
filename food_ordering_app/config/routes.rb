@@ -1,19 +1,39 @@
 Rails.application.routes.draw do
+  use_doorkeeper
+
+  devise_for :users
+
   namespace :admin do
     resources :products
     resources :users
     resources :orders, only: [:index, :show]
   end
 
+  #API routes
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :show, :create]
+      resources :products, only: [:index, :show]
+      resources :carts, only: [:index, :create, :update, :destroy] do
+        collection do
+          delete :clear
+        end
+      end
+
+      resources :orders, only: [:index, :show, :create]
+
+      namespace :admin do
+        resources :users, only: [:index, :show, :update, :destroy]
+        resources :products, only: [:index, :show, :create, :update, :destroy]
+        resources :orders, only: [:index, :show, :update, :destroy]
+      end
+    end
+  end
+
   root to: "main#index"
 
-  resources :users, only: [ :new, :create, :index ]
-  resources :orders, only: [:index, :show, :create]
-
-  delete "/logout", to: "session#destroy", as: :logout
-  get "/login", to: "session#new", as: :login
-  post "/session", to: "session#create"
-  get "/session/success", to: "session#success", as: :session_success
+  resources :users, only: [ :index ]
+  resources :orders, only: [ :index, :show, :create ]
 
   resources :carts, only: [ :index, :create, :destroy, :update ] do
     collection do

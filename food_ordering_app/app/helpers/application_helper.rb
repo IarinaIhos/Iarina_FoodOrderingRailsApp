@@ -1,6 +1,6 @@
 module ApplicationHelper
   def navbar_profile_link
-    if logged_in?
+    if user_signed_in?
       link_to current_user.name, "#", class: "nav-link dropdown-toggle", id: "profileDropdown", role: "button", data: { bs_toggle: "dropdown" }, aria: { expanded: false }
     end
   end
@@ -24,7 +24,7 @@ module ApplicationHelper
   end
 
   def cart_link
-    if logged_in? && !current_user.admin?
+    if user_signed_in? && !current_user.admin?
       link_to "CART", carts_path, class: "nav-link"
     end
   end
@@ -44,13 +44,13 @@ module ApplicationHelper
   end
 
   def navbar_login_link
-    unless logged_in?
+    unless user_signed_in?
       link_to "LOGIN", login_path, class: "nav-link"
     end
   end
 
   def navbar_register_link
-    unless logged_in?
+    unless user_signed_in?
       link_to "REGISTER", register_path, class: "nav-link"
     end
   end

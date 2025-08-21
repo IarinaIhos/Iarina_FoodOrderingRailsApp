@@ -8,8 +8,8 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than: 0 }
-  validates :category, presence: true
-  validates :diet, presence: true
+  validates :category, presence: true, on: :create
+  validates :diet, presence: true, on: :create
 
   enum :category, { appetizer: 0, main_course: 1, dessert: 2, beverage: 3 }
   enum :diet, { regular: 0, vegetarian: 1, vegan: 2, gluten_free: 3 }

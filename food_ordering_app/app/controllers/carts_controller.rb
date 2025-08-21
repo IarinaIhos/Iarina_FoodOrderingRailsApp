@@ -36,14 +36,6 @@ class CartsController < ApplicationController
     redirect_to root_path, alert: "Product not found."
   end
 
-  def destroy
-    if @cart_item.destroy
-      redirect_to carts_path, notice: "Item removed from cart successfully."
-    else
-      redirect_to carts_path, alert: "Failed to remove item from cart."
-    end
-  end
-
   def update
     new_quantity = params[:quantity].to_i
     
@@ -67,6 +59,14 @@ class CartsController < ApplicationController
     end
   end
 
+  def destroy
+    if @cart_item.destroy
+      redirect_to carts_path, notice: "Item removed from cart successfully."
+    else
+      redirect_to carts_path, alert: "Failed to remove item from cart."
+    end
+  end
+  
   def clear
     current_user.cart_items.destroy_all
     redirect_to carts_path, notice: "Cart cleared successfully."
