@@ -1,5 +1,4 @@
 class Admin::UsersController < ApplicationController
-  before_action :require_login
   before_action :require_admin
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -37,11 +36,5 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :role)
-  end
-
-  def require_admin
-    unless current_user.admin?
-      redirect_to root_path, alert: "Access denied. Admin privileges required."
-    end
   end
 end 
